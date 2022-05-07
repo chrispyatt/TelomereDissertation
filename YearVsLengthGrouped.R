@@ -21,6 +21,7 @@ runName <- names(data)
 df = get(runName, data)
 
 gd <- df %>% group_by(Read_length, Sample) %>% summarise(MeanLengthEstimate = mean(Length), Min = min(Length), Max = max(Length), Sex = unique(Sex), YearOfBirth = unique(Year))
+#newdata <- rbind(newdata, gd)
 
 fitted_models = gd %>% group_by(Read_length) %>% do(model = lm(YearOfBirth ~ MeanLengthEstimate, data = .))
 print(fitted_models$model)
